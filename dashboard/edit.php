@@ -4,8 +4,6 @@ require_once "../includes/functions.php";
 redirect_to_login();
 require_once "../config/db.php";
 
-
-
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $id = $_POST['id'];
@@ -26,8 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 }
 
 if ($_SERVER['REQUEST_METHOD'] = 'GET') {
-
-
     if (!isset($_GET['id'])) {
         header("Location: /fims/dashboard");
     }
@@ -44,6 +40,11 @@ if ($_SERVER['REQUEST_METHOD'] = 'GET') {
         exit();
     }
     $friend = mysqli_fetch_assoc($result);
+    // check if the friend is my friend or not
+    if ($friend['added_by'] != $uid) {
+        echo "Not allowed to edit because " . $friend['name'] . " is not your friend";
+        exit();
+    }
 }
 
 
@@ -59,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] = 'GET') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit A friend</title>
 </head>
+
 <body>
     <a href="/fims/">Home</a>
     <a href="/fims/dashboard">Dashboard</a>
