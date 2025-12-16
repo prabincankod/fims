@@ -48,6 +48,7 @@ $result = mysqli_query($conn, $sql);
                     echo "<td>" . $friend['email'] . " </td>";
 
                     echo "<td><a href='delete.php?id=" . $friend['id'] . "' > delete </a> </td>";
+                    echo "<td><a href='edit.php?id=" . $friend['id'] . "' > edit </a> </td>";
 
                     echo "</tr> ";
                 }
